@@ -1,16 +1,25 @@
-# init
-
 class BinarySearchTree:
   def __init__(self, value):
     self.value = value
     self.left = None
     self.right = None
 
-  def depth_first_for_each(self, cb):
-    pass    
-
   def breadth_first_for_each(self, cb):
-    pass
+    queue = []
+    queue.append(self.value)
+    print(queue)
+
+    while len(queue) > 0:
+      print(cb(queue[0]))
+      queue.pop(0)
+
+      if self.left is not None:
+        queue.append(self.left)
+
+      if self.right is not None:
+        queue.append(self.right)
+
+# py test_breadth_first_search.py
 
   def insert(self, value):
     new_tree = BinarySearchTree(value)
@@ -49,3 +58,15 @@ class BinarySearchTree:
         max_value = current.value
       current = current.right
     return max_value
+
+
+arr = []    
+cb = lambda x: arr.append(x)
+
+b = BinarySearchTree(5)
+b.insert(3)
+b.insert(4)
+b.insert(10)
+b.insert(9)
+b.insert(11)
+print(b.breadth_first_for_each(cb))
