@@ -6,18 +6,18 @@ class BinarySearchTree:
 
   def breadth_first_for_each(self, cb):
     queue = []
-    queue.append(self.value)
-    print(queue)
+    queue.append(self)
 
     while len(queue) > 0:
-      print(cb(queue[0]))
-      queue.pop(0)
+      node = queue.pop(0)
 
-      if self.left is not None:
-        queue.append(self.left)
+      if node.left is not None:
+        queue.append(node.left)
 
-      if self.right is not None:
-        queue.append(self.right)
+      if node.right is not None:
+        queue.append(node.right)
+
+      cb(node.value)
 
 # py test_breadth_first_search.py
 
@@ -59,14 +59,3 @@ class BinarySearchTree:
       current = current.right
     return max_value
 
-
-arr = []    
-cb = lambda x: arr.append(x)
-
-b = BinarySearchTree(5)
-b.insert(3)
-b.insert(4)
-b.insert(10)
-b.insert(9)
-b.insert(11)
-print(b.breadth_first_for_each(cb))
